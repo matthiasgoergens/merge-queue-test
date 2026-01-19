@@ -3,10 +3,12 @@ name: CI
 # This workflow runs on pull requests and when PRs enter the merge queue
 # The merge_group event is crucial for GitHub's merge queue functionality
 on:
+  push:
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
   merge_group:
+    types: [checks_requested]
 
 jobs:
   test:
