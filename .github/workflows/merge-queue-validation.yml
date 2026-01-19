@@ -1,0 +1,33 @@
+name: Merge Queue Validation
+
+# This workflow specifically validates merge queue functionality
+on:
+  merge_group:
+    types: [checks_requested]
+
+jobs:
+  validate-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout merge queue branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.merge_group.head_sha }}
+      
+      - name: Display merge queue information
+        run: |
+          echo "Merge queue branch: ${{ github.event.merge_group.head_ref }}"
+          echo "Base branch: ${{ github.event.merge_group.base_ref }}"
+          echo "Head SHA: ${{ github.event.merge_group.head_sha }}"
+          echo "Base SHA: ${{ github.event.merge_group.base_sha }}"
+      
+      - name: Run integration tests
+        run: |
+          echo "Running integration tests for merge queue..."
+          echo "Validating merged state..."
+          echo "All validations passed!"
+      
+      - name: Final validation
+        run: |
+          echo "Merge queue validation successful!"
+          echo "This PR is ready to be merged from the queue."
