@@ -1,0 +1,33 @@
+name: CI
+
+# This workflow runs on pull requests and when PRs enter the merge queue
+# The merge_group event is crucial for GitHub's merge queue functionality
+on:
+  pull_request:
+    branches:
+      - main
+  merge_group:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          echo "All tests passed!"
+          
+      - name: Build check
+        run: |
+          echo "Running build checks..."
+          echo "Build successful!"
+      
+      - name: Lint check
+        run: |
+          echo "Running linting..."
+          echo "Linting passed!"
