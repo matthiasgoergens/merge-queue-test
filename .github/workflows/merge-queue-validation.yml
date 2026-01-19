@@ -8,6 +8,8 @@ on:
 jobs:
   validate-merge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Checkout merge queue branch
         uses: actions/checkout@v4
